@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -92,7 +93,14 @@ class _AppPlacesPickerState extends State<AppPlacesPicker> {
       return;
     }
 
-    final apiKey = widget.apiKey ?? AppConfig.googleMapsApiKey;
+    // Get platform-specific API key
+    final apiKey = widget.apiKey ??
+        (Platform.isAndroid
+            ? AppConfig.googleMapsApiKeyAndroid
+            : Platform.isIOS
+                ? AppConfig.googleMapsApiKeyIOS
+                : '');
+    
     if (apiKey.isEmpty) {
       return;
     }

@@ -45,5 +45,30 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	
+	<!-- Google Maps API Key -->
+	<!-- Replace with your actual iOS Google Maps API key -->
+	<!-- This value should come from your .env file: GOOGLE_MAPS_API_KEY_IOS -->
+	<key>GMSApiKey</key>
+	<string>YOUR_IOS_GOOGLE_MAPS_API_KEY_HERE</string>
+	
+	<!-- Location Permissions -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to your location to show your position on the map and provide location-based services.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs access to your location to show your position on the map and provide location-based services even when the app is in the background.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs access to your location to provide location-based services in the background.</string>
+	
+	<!-- Notification Permissions (iOS 10+) -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+		<string>location</string>
+	</array>
+	
+	<!-- Notification Permission Description (iOS 10+) -->
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>This app needs permission to send you notifications about important updates and alerts.</string>
 </dict>
 </plist>

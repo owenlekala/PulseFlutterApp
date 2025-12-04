@@ -43,7 +43,7 @@ class AppLoadingIndicator extends StatelessWidget {
         indicator = LinearProgressIndicator(
           minHeight: strokeWidth ?? 4,
           valueColor: AlwaysStoppedAnimation<Color>(indicatorColor),
-          backgroundColor: indicatorColor.withOpacity(0.2),
+          backgroundColor: indicatorColor.withValues(alpha: 0.2),
         );
         break;
     }

@@ -97,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen>
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withValues(alpha: 0.2),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -123,7 +123,7 @@ class _SplashScreenState extends State<SplashScreen>
                   Text(
                     'Version ${AppConfig.appVersion}',
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onPrimary.withOpacity(0.8),
+                      color: theme.colorScheme.onPrimary.withValues(alpha: 0.8),
                     ),
                   ),
                   const SizedBox(height: 48),

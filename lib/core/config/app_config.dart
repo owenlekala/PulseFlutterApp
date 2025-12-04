@@ -11,7 +11,10 @@ class AppConfig {
     return Environment.fromString(envString);
   }
 
-  static String get googleMapsApiKey => EnvLoader.get('GOOGLE_MAPS_API_KEY');
+  static String get googleMapsApiKeyAndroid =>
+      EnvLoader.get('GOOGLE_MAPS_API_KEY_ANDROID');
+  static String get googleMapsApiKeyIOS =>
+      EnvLoader.get('GOOGLE_MAPS_API_KEY_IOS');
 
   // App settings
   static bool get enableLogging => !environment.isProduction;

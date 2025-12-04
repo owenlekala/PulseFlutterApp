@@ -32,7 +32,7 @@ class AppIconButton extends StatelessWidget {
       width: buttonSize,
       height: buttonSize,
       decoration: BoxDecoration(
-        color: backgroundColor ?? theme.colorScheme.surfaceVariant,
+        color: backgroundColor ?? theme.colorScheme.surfaceContainerHighest,
         shape: BoxShape.circle,
       ),
       child: IconButton(

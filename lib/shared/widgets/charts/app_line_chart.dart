@@ -33,7 +33,7 @@ class AppLineChart extends StatelessWidget {
     final theme = Theme.of(context);
     final brightness = theme.brightness;
     final primaryColor = lineColor ?? AppColors.getPrimary(brightness);
-    final fillGradientColor = fillColor ?? primaryColor.withOpacity(0.3);
+    final fillGradientColor = fillColor ?? primaryColor.withValues(alpha: 0.3);
 
     return Container(
       padding: const EdgeInsets.all(16),

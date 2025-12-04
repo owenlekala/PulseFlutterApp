@@ -96,8 +96,8 @@ class AppTimePicker extends StatelessWidget {
               errorText: errorText,
               filled: true,
               fillColor: enabled
-                  ? theme.colorScheme.surfaceVariant
-                  : theme.colorScheme.surfaceVariant.withOpacity(0.5),
+                  ? theme.colorScheme.surfaceContainerHighest
+                  : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
             ),
             child: Text(
               displayText,
