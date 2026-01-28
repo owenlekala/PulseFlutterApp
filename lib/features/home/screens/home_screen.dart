@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/app_icons.dart';
 import '../../../core/config/app_config.dart';
 import '../../../shared/widgets/cards/app_card.dart';
-import '../../../shared/widgets/buttons/app_icon_button.dart';
 import '../../../shared/widgets/buttons/app_button.dart';
 import '../../../shared/widgets/inputs/app_text_field.dart';
 import '../../../shared/widgets/inputs/app_date_picker.dart';
@@ -12,6 +9,9 @@ import '../../../shared/widgets/inputs/app_time_picker.dart';
 import '../../../shared/widgets/inputs/app_places_picker.dart';
 import '../../../shared/widgets/loading/app_loading_indicator.dart';
 import '../../../shared/widgets/snackbars/app_snackbar.dart';
+import '../../../shared/widgets/navigation/app_app_bar.dart';
+import '../../../shared/widgets/navigation/app_drawer.dart';
+import '../../../shared/widgets/navigation/app_bottom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,25 +23,81 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
+  int _currentBottomNavIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        actions: [
-          Consumer<ThemeProvider>(
-            builder: (context, themeProvider, _) {
-              return AppIconButton(
-                icon: themeProvider.isDarkMode
-                    ? Icons.light_mode
-                    : Icons.dark_mode,
-                onPressed: () => themeProvider.toggleTheme(),
-                tooltip: 'Toggle theme',
-              );
+      appBar: const AppAppBar(
+        title: 'Home',
+      ),
+      drawer: AppDrawer(
+        userName: 'John Doe',
+        userEmail: 'john.doe@example.com',
+        items: [
+          AppDrawerItem(
+            title: 'Home',
+            icon: AppIcons.home,
+            isSelected: true,
+            onTap: () {
+              // Navigate to home
             },
+          ),
+          AppDrawerItem(
+            title: 'Profile',
+            icon: AppIcons.profile,
+            onTap: () {
+              AppSnackBar.showInfo(context, 'Profile tapped');
+            },
+          ),
+          AppDrawerItem(
+            title: 'Settings',
+            icon: AppIcons.settings,
+            onTap: () {
+              AppSnackBar.showInfo(context, 'Settings tapped');
+            },
+          ),
+          AppDrawerItem(
+            title: 'Search',
+            icon: AppIcons.search,
+            onTap: () {
+              AppSnackBar.showInfo(context, 'Search tapped');
+            },
+          ),
+        ],
+        onProfileTap: () {
+          AppSnackBar.showInfo(context, 'Profile section tapped');
+        },
+      ),
+      bottomNavigationBar: AppBottomNavigationBar(
+        currentIndex: _currentBottomNavIndex,
+        onTap: (index) {
+          setState(() {
+            _currentBottomNavIndex = index;
+          });
+        },
+        items: const [
+          AppBottomNavItem(
+            label: 'Home',
+            icon: AppIcons.home,
+            selectedIcon: AppIcons.homeFilled,
+          ),
+          AppBottomNavItem(
+            label: 'Search',
+            icon: AppIcons.search,
+            selectedIcon: AppIcons.searchFilled,
+          ),
+          AppBottomNavItem(
+            label: 'Profile',
+            icon: AppIcons.profile,
+            selectedIcon: AppIcons.profileFilled,
+          ),
+          AppBottomNavItem(
+            label: 'Settings',
+            icon: AppIcons.settings,
+            selectedIcon: AppIcons.settingsFilled,
           ),
         ],
       ),
