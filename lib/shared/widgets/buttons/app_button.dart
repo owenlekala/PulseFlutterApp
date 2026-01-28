@@ -55,6 +55,10 @@ class AppButton extends StatelessWidget {
             foregroundColor: foregroundColor ?? theme.colorScheme.onPrimary,
             padding: padding ?? _getPadding(),
             minimumSize: isFullWidth ? const Size(double.infinity, 0) : null,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50), // Fully rounded ends
+            ),
+            elevation: 2,
           ),
           child: _buildChild(context),
         );
@@ -67,6 +71,10 @@ class AppButton extends StatelessWidget {
             foregroundColor: foregroundColor ?? theme.colorScheme.onSecondary,
             padding: padding ?? _getPadding(),
             minimumSize: isFullWidth ? const Size(double.infinity, 0) : null,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50), // Fully rounded ends
+            ),
+            elevation: 2,
           ),
           child: _buildChild(context),
         );
@@ -78,6 +86,13 @@ class AppButton extends StatelessWidget {
             foregroundColor: foregroundColor ?? theme.colorScheme.primary,
             padding: padding ?? _getPadding(),
             minimumSize: isFullWidth ? const Size(double.infinity, 0) : null,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50), // Fully rounded ends
+            ),
+            side: BorderSide(
+              color: foregroundColor ?? theme.colorScheme.primary,
+              width: 2,
+            ),
           ),
           child: _buildChild(context),
         );
@@ -89,6 +104,9 @@ class AppButton extends StatelessWidget {
             foregroundColor: foregroundColor ?? theme.colorScheme.primary,
             padding: padding ?? _getPadding(),
             minimumSize: isFullWidth ? const Size(double.infinity, 0) : null,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50), // Fully rounded ends
+            ),
           ),
           child: _buildChild(context),
         );
@@ -119,22 +137,32 @@ class AppButton extends StatelessWidget {
         children: [
           icon!,
           const SizedBox(width: 8),
-          Text(text),
+          Text(
+            text,
+            style: TextStyle(
+              fontWeight: FontWeight.w600, // Increased font weight
+            ),
+          ),
         ],
       );
     }
 
-    return Text(text);
+    return Text(
+      text,
+      style: TextStyle(
+        fontWeight: FontWeight.w600, // Increased font weight
+      ),
+    );
   }
 
   EdgeInsets _getPadding() {
     switch (size) {
       case AppButtonSize.small:
-        return const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+        return const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
       case AppButtonSize.medium:
-        return const EdgeInsets.symmetric(horizontal: 24, vertical: 12);
+        return const EdgeInsets.symmetric(horizontal: 28, vertical: 16); // Increased height
       case AppButtonSize.large:
-        return const EdgeInsets.symmetric(horizontal: 32, vertical: 16);
+        return const EdgeInsets.symmetric(horizontal: 36, vertical: 20); // Increased height
     }
   }
 
@@ -149,4 +177,3 @@ class AppButton extends StatelessWidget {
     }
   }
 }
-

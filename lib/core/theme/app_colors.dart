@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Primary Colors
-  static const Color primaryLight = Color(0xFF6366F1);
-  static const Color primaryDark = Color(0xFF818CF8);
+  // Primary Colors - Blue
+  static const Color primaryLight = Color(0xFF2563EB); // Blue
+  static const Color primaryDark = Color(0xFF3B82F6); // Lighter Blue for dark mode
   
-  static const Color primaryContainerLight = Color(0xFFE0E7FF);
-  static const Color primaryContainerDark = Color(0xFF312E81);
+  static const Color primaryContainerLight = Color(0xFFDBEAFE);
+  static const Color primaryContainerDark = Color(0xFF1E3A8A);
 
   // Secondary Colors
   static const Color secondaryLight = Color(0xFF10B981);
@@ -43,29 +43,29 @@ class AppColors {
   static const Color infoContainerLight = Color(0xFFDBEAFE);
   static const Color infoContainerDark = Color(0xFF1E3A8A);
 
-  // Background Colors
+  // Background Colors - Based on the dark mode image
   static const Color backgroundLight = Color(0xFFFFFFFF);
-  static const Color backgroundDark = Color(0xFF0F172A);
+  static const Color backgroundDark = Color(0xFF191B19); // Dark charcoal from image
   
   static const Color surfaceLight = Color(0xFFF8FAFC);
-  static const Color surfaceDark = Color(0xFF1E293B);
+  static const Color surfaceDark = Color(0xFF272927); // Slightly lighter than background
   
   static const Color surfaceVariantLight = Color(0xFFF1F5F9);
-  static const Color surfaceVariantDark = Color(0xFF334155);
+  static const Color surfaceVariantDark = Color(0xFF363A36); // Medium gray from image
 
-  // Text Colors
+  // Text Colors - Based on the dark mode image
   static const Color textPrimaryLight = Color(0xFF0F172A);
-  static const Color textPrimaryDark = Color(0xFFF8FAFC);
+  static const Color textPrimaryDark = Color(0xFFC0C4C4); // Light gray text from image
   
   static const Color textSecondaryLight = Color(0xFF64748B);
-  static const Color textSecondaryDark = Color(0xFF94A3B8);
+  static const Color textSecondaryDark = Color(0xFF8D8E8E); // Medium gray text from image
   
   static const Color textTertiaryLight = Color(0xFF94A3B8);
-  static const Color textTertiaryDark = Color(0xFF64748B);
+  static const Color textTertiaryDark = Color(0xFF696969); // Darker gray from image
 
-  // Border Colors
+  // Border Colors - Based on the dark mode image
   static const Color borderLight = Color(0xFFE2E8F0);
-  static const Color borderDark = Color(0xFF334155);
+  static const Color borderDark = Color(0xFF4B4F4B); // Border color from image
   
   static const Color borderVariantLight = Color(0xFFF1F5F9);
   static const Color borderVariantDark = Color(0xFF475569);
@@ -119,4 +119,3 @@ class AppColors {
     return brightness == Brightness.light ? infoLight : infoDark;
   }
 }
-
