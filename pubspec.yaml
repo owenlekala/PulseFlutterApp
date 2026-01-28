@@ -71,6 +71,9 @@ dependencies:
   # Permissions
   permission_handler: ^11.3.1
 
+  # Connectivity
+  connectivity_plus: ^6.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

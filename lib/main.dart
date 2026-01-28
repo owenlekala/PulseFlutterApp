@@ -8,6 +8,7 @@ import 'core/config/app_config.dart';
 import 'core/routing/app_router.dart';
 import 'core/error/error_handler_setup.dart';
 import 'core/error/error_boundary.dart';
+import 'shared/widgets/connectivity/no_internet_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,13 +50,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
-        return MaterialApp.router(
-          title: AppConfig.appName,
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.getLightTheme(),
-          darkTheme: AppTheme.getDarkTheme(),
-          themeMode: themeProvider.themeMode,
-          routerConfig: AppRouter.router,
+        return ConnectivityWrapper(
+          child: MaterialApp.router(
+            title: AppConfig.appName,
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.getLightTheme(),
+            darkTheme: AppTheme.getDarkTheme(),
+            themeMode: themeProvider.themeMode,
+            routerConfig: AppRouter.router,
+          ),
         );
       },
     );
