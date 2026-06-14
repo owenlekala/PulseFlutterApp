@@ -21,10 +21,10 @@ flutter pub get
 
 1. Copy the example environment file:
    ```bash
-   cp .env.example .env
+   cp .env.example .env.development
    ```
 
-2. Edit `.env` and fill in your actual values:
+2. Edit `.env.development` and fill in your actual values:
    - `APP_ENV`: Set to `dev`, `staging`, or `production`
    - `API_BASE_URL`: Your API base URL
    - `API_VERSION`: API version (e.g., `v1`)
@@ -55,9 +55,10 @@ flutter pub get
 ### 4. Google Maps Setup
 
 1. Get a Google Maps API key from [Google Cloud Console](https://console.cloud.google.com/)
-2. Add the API key to your `.env` file:
+2. Add the API key to your environment file:
    ```
-   GOOGLE_MAPS_API_KEY=your_api_key_here
+   GOOGLE_MAPS_API_KEY_ANDROID=your_android_api_key_here
+   GOOGLE_MAPS_API_KEY_IOS=your_ios_api_key_here
    ```
 
 3. For Android, add the API key to `android/app/src/main/AndroidManifest.xml`:
@@ -233,12 +234,11 @@ flutter build ios --release   # iOS
 - Verify Firebase is enabled in your Firebase Console
 
 ### Environment variables not loading
-- Ensure `.env` file exists in the project root
-- Check that `.env` is listed in `pubspec.yaml` assets
+- Ensure the expected file exists in the project root (`.env.development` by default)
+- Check that the environment file is listed in `pubspec.yaml` assets
 - Verify environment variable names match those in `.env.example`
 
 ### Google Maps not showing
 - Verify API key is set in `.env`
 - Check platform-specific configuration (AndroidManifest.xml, Info.plist)
 - Ensure Google Maps API is enabled in Google Cloud Console
-
