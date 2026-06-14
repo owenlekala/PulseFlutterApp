@@ -53,9 +53,6 @@ dependencies:
   # State management for theme
   provider: ^6.1.2
 
-  # Theme persistence
-  shared_preferences: ^2.3.2
-
   # Icons are handled through Material Icons (built-in)
   # For custom icon sets, consider: font_awesome_flutter, material_symbols_icons, etc.
 
@@ -78,9 +75,6 @@ dependencies:
 
   # Permissions
   permission_handler: ^11.3.1
-
-  # Connectivity
-  connectivity_plus: ^6.1.0
 
 dev_dependencies:
   flutter_test:
