@@ -326,6 +326,32 @@ void main() {
     expect(lightColors.sheetBackground, isNot(darkColors.sheetBackground));
   });
 
+  test('app typography does not use letter spacing', () {
+    final themes = [AppTheme.getLightTheme(), AppTheme.getDarkTheme()];
+
+    for (final theme in themes) {
+      final styles = [
+        theme.textTheme.displayLarge,
+        theme.textTheme.displayMedium,
+        theme.textTheme.displaySmall,
+        theme.textTheme.headlineLarge,
+        theme.textTheme.headlineMedium,
+        theme.textTheme.headlineSmall,
+        theme.textTheme.titleLarge,
+        theme.textTheme.titleMedium,
+        theme.textTheme.titleSmall,
+        theme.textTheme.bodyLarge,
+        theme.textTheme.bodyMedium,
+        theme.textTheme.bodySmall,
+        theme.textTheme.labelLarge,
+        theme.textTheme.labelMedium,
+        theme.textTheme.labelSmall,
+      ];
+
+      expect(styles.every((style) => style?.letterSpacing == 0), isTrue);
+    }
+  });
+
   testWidgets(
     'AppGoogleMap shows fallback when native maps config is missing',
     (tester) async {

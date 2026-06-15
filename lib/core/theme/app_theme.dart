@@ -372,7 +372,7 @@ class AppTheme {
       displayLarge: TextStyle(
         fontSize: 57,
         fontWeight: FontWeight.w400,
-        letterSpacing: -0.25,
+        letterSpacing: 0,
         color: AppColors.getTextPrimary(brightness),
         height: 1.12,
       ),
