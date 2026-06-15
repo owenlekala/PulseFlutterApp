@@ -44,14 +44,12 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
   final GlobalKey<FormFieldState<T>> _fieldKey = GlobalKey<FormFieldState<T>>();
   FocusNode? _internalFocusNode;
   bool _hasInteracted = false;
-  T? _selectedValue;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? _internalFocusNode!;
 
   @override
   void initState() {
     super.initState();
-    _selectedValue = widget.value;
     _internalFocusNode = widget.focusNode == null ? FocusNode() : null;
     _effectiveFocusNode.addListener(_handleFocusChange);
   }
@@ -60,7 +58,6 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
   void didUpdateWidget(covariant AppDropdown<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.value != widget.value) {
-      _selectedValue = widget.value;
       _fieldKey.currentState?.didChange(widget.value);
     }
     if (oldWidget.focusNode != widget.focusNode) {
@@ -82,6 +79,9 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
   }
 
   void _handleFocusChange() {
+    if (mounted) {
+      setState(() {});
+    }
     if (!_effectiveFocusNode.hasFocus) {
       _validateInline();
     }
@@ -104,6 +104,7 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
 
     _hasInteracted = true;
     _effectiveFocusNode.requestFocus();
+    final selectedValue = _fieldKey.currentState?.value ?? widget.value;
 
     final selection = await showModalBottomSheet<_DropdownSelection<T>>(
       context: context,
@@ -147,7 +148,7 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
                     itemCount: widget.items.length,
                     itemBuilder: (context, index) {
                       final item = widget.items[index];
-                      final isSelected = item.value == _selectedValue;
+                      final isSelected = item.value == selectedValue;
 
                       return ListTile(
                         enabled: item.enabled,
@@ -186,9 +187,6 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
       return;
     }
 
-    setState(() {
-      _selectedValue = selection.value;
-    });
     _fieldKey.currentState?.didChange(selection.value);
     _validateInline();
     widget.onChanged?.call(selection.value);
@@ -219,7 +217,7 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
           builder: (field) {
             DropdownMenuItem<T>? selectedItem;
             for (final item in widget.items) {
-              if (item.value == _selectedValue) {
+              if (item.value == field.value) {
                 selectedItem = item;
                 break;
               }
