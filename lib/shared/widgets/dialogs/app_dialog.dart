@@ -74,20 +74,13 @@ class AppDialog extends StatelessWidget {
             Icon(icon, color: iconColor ?? theme.colorScheme.primary),
             const SizedBox(width: 12),
           ],
-          Expanded(
-            child: Text(
-              title,
-              style: theme.textTheme.titleLarge,
-            ),
-          ),
+          Expanded(child: Text(title, style: theme.textTheme.titleLarge)),
         ],
       ),
-      content: content ??
+      content:
+          content ??
           (message != null
-              ? Text(
-                  message!,
-                  style: theme.textTheme.bodyMedium,
-                )
+              ? Text(message!, style: theme.textTheme.bodyMedium)
               : null),
       actions: [
         if (showCancel)
@@ -226,4 +219,3 @@ class AppConfirmDialog extends StatelessWidget {
     );
   }
 }
-

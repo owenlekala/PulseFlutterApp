@@ -60,7 +60,8 @@ class _AppPlacesPickerState extends State<AppPlacesPicker> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? TextEditingController(text: widget.initialValue);
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initialValue);
     _focusNode.addListener(_onFocusChange);
   }
 
@@ -94,13 +95,14 @@ class _AppPlacesPickerState extends State<AppPlacesPicker> {
     }
 
     // Get platform-specific API key
-    final apiKey = widget.apiKey ??
+    final apiKey =
+        widget.apiKey ??
         (Platform.isAndroid
             ? AppConfig.googleMapsApiKeyAndroid
             : Platform.isIOS
-                ? AppConfig.googleMapsApiKeyIOS
-                : '');
-    
+            ? AppConfig.googleMapsApiKeyIOS
+            : '');
+
     if (apiKey.isEmpty) {
       return;
     }
@@ -121,11 +123,14 @@ class _AppPlacesPickerState extends State<AppPlacesPicker> {
 
       if (data['status'] == 'OK' && mounted) {
         final predictions = (data['predictions'] as List)
-            .map((prediction) => PlacePrediction(
-                  placeId: prediction['place_id'],
-                  description: prediction['description'],
-                  secondaryText: prediction['structured_formatting']?['secondary_text'],
-                ))
+            .map(
+              (prediction) => PlacePrediction(
+                placeId: prediction['place_id'],
+                description: prediction['description'],
+                secondaryText:
+                    prediction['structured_formatting']?['secondary_text'],
+              ),
+            )
             .toList();
 
         setState(() {
@@ -226,10 +231,7 @@ class _AppPlacesPickerState extends State<AppPlacesPicker> {
         if (widget.label != null)
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child: Text(
-              widget.label!,
-              style: theme.textTheme.labelLarge,
-            ),
+            child: Text(widget.label!, style: theme.textTheme.labelLarge),
           ),
         CompositedTransformTarget(
           link: _layerLink,

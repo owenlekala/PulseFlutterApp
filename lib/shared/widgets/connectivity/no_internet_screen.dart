@@ -54,7 +54,9 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Still no internet connection. Please check your network settings.'),
+              content: Text(
+                'Still no internet connection. Please check your network settings.',
+              ),
               duration: Duration(seconds: 2),
             ),
           );
