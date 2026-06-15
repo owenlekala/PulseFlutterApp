@@ -11,7 +11,7 @@ class PermissionsHelper {
   }) async {
     try {
       ph.PermissionStatus status;
-      
+
       if (requestAlways) {
         status = await ph.Permission.locationAlways.request();
       } else {
@@ -73,7 +73,9 @@ class PermissionsHelper {
 
   /// Check if app should show permission rationale
   /// (Android only - returns false on iOS)
-  static Future<bool> shouldShowRequestRationale(ph.Permission permission) async {
+  static Future<bool> shouldShowRequestRationale(
+    ph.Permission permission,
+  ) async {
     try {
       return await permission.shouldShowRequestRationale;
     } on PlatformException catch (e) {
@@ -97,18 +99,20 @@ class PermissionsHelper {
     bool locationAlways = false,
   }) async {
     final results = await requestPermissions([
-      locationAlways ? ph.Permission.locationAlways : ph.Permission.locationWhenInUse,
+      locationAlways
+          ? ph.Permission.locationAlways
+          : ph.Permission.locationWhenInUse,
       ph.Permission.notification,
     ]);
 
     return {
-      'location': results[locationAlways
-              ? ph.Permission.locationAlways
-              : ph.Permission.locationWhenInUse]
-          ?.isGranted ??
+      'location':
+          results[locationAlways
+                  ? ph.Permission.locationAlways
+                  : ph.Permission.locationWhenInUse]
+              ?.isGranted ??
           false,
       'notification': results[ph.Permission.notification]?.isGranted ?? false,
     };
   }
 }
-

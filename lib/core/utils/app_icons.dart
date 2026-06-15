@@ -129,4 +129,3 @@ class AppIcons {
   static const loading = MingCuteIcons.mgc_loading_line;
   static const loadingFilled = MingCuteIcons.mgc_loading_fill;
 }
-

@@ -87,7 +87,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
-      letterSpacing: 0.15,
+      letterSpacing: 0,
       color: AppColors.getTextPrimary(brightness),
       height: 1.5,
     );
@@ -98,7 +98,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
+      letterSpacing: 0,
       color: AppColors.getTextPrimary(brightness),
       height: 1.43,
     );
@@ -110,7 +110,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.5,
+      letterSpacing: 0,
       color: AppColors.getTextPrimary(brightness),
       height: 1.5,
     );
@@ -121,7 +121,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.25,
+      letterSpacing: 0,
       color: AppColors.getTextPrimary(brightness),
       height: 1.43,
     );
@@ -132,7 +132,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.4,
+      letterSpacing: 0,
       color: AppColors.getTextSecondary(brightness),
       height: 1.33,
     );
@@ -144,7 +144,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
+      letterSpacing: 0,
       color: AppColors.getTextPrimary(brightness),
       height: 1.43,
     );
@@ -155,7 +155,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w500,
-      letterSpacing: 0.5,
+      letterSpacing: 0,
       color: AppColors.getTextPrimary(brightness),
       height: 1.33,
     );
@@ -166,7 +166,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 11,
       fontWeight: FontWeight.w500,
-      letterSpacing: 0.5,
+      letterSpacing: 0,
       color: AppColors.getTextSecondary(brightness),
       height: 1.45,
     );
@@ -178,7 +178,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w600,
-      letterSpacing: 0.75,
+      letterSpacing: 0,
       color: AppColors.getTextPrimary(brightness),
       height: 1.43,
     );
@@ -189,7 +189,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.4,
+      letterSpacing: 0,
       color: AppColors.getTextSecondary(brightness),
       height: 1.33,
     );
@@ -200,7 +200,7 @@ class AppTextStyles {
     return TextStyle(
       fontSize: 10,
       fontWeight: FontWeight.w500,
-      letterSpacing: 1.5,
+      letterSpacing: 0,
       color: AppColors.getTextSecondary(brightness),
       height: 1.6,
     );

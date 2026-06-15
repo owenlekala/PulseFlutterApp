@@ -5,7 +5,7 @@ class ApiConfig {
   static String get baseUrl {
     final env = Environment.current;
     final envBaseUrl = EnvLoader.get('API_BASE_URL');
-    
+
     if (envBaseUrl.isNotEmpty) {
       return envBaseUrl;
     }
@@ -21,8 +21,9 @@ class ApiConfig {
     }
   }
 
-  static String get apiVersion => EnvLoader.get('API_VERSION', defaultValue: 'v1');
-  
+  static String get apiVersion =>
+      EnvLoader.get('API_VERSION', defaultValue: 'v1');
+
   static String get fullBaseUrl => '$baseUrl/$apiVersion';
 
   static Duration get connectTimeout => const Duration(seconds: 30);
@@ -30,8 +31,7 @@ class ApiConfig {
   static Duration get sendTimeout => const Duration(seconds: 30);
 
   static Map<String, String> get defaultHeaders => {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      };
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  };
 }
-

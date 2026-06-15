@@ -29,10 +29,15 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
     // Set up error handling
     FlutterError.onError = (FlutterErrorDetails details) {
       if (mounted) {
-        setState(() {
-          _error = details.exception;
-          _stackTrace = details.stack;
-          _hasError = true;
+        // Use addPostFrameCallback to avoid setState during build
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            setState(() {
+              _error = details.exception;
+              _stackTrace = details.stack;
+              _hasError = true;
+            });
+          }
         });
       }
       // Also log to console in debug mode

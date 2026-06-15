@@ -30,15 +30,17 @@ void main() async {
     debugPrint('Warning: Could not initialize Firebase: $e');
   }
 
-  // Initialize SharedPreferences for theme persistence
-  final prefs = await SharedPreferences.getInstance();
+  SharedPreferences? prefs;
+  try {
+    prefs = await SharedPreferences.getInstance();
+  } catch (e) {
+    debugPrint('Warning: Could not initialize SharedPreferences: $e');
+  }
 
   runApp(
-    ErrorBoundary(
-      child: ChangeNotifierProvider(
-        create: (_) => ThemeProvider(prefs),
-        child: const MyApp(),
-      ),
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(prefs),
+      child: const MyApp(),
     ),
   );
 }
@@ -50,15 +52,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
-        return ConnectivityWrapper(
-          child: MaterialApp.router(
-            title: AppConfig.appName,
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.getLightTheme(),
-            darkTheme: AppTheme.getDarkTheme(),
-            themeMode: themeProvider.themeMode,
-            routerConfig: AppRouter.router,
-          ),
+        return MaterialApp.router(
+          title: AppConfig.appName,
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.getLightTheme(),
+          darkTheme: AppTheme.getDarkTheme(),
+          themeMode: themeProvider.themeMode,
+          routerConfig: AppRouter.router,
+          builder: (context, child) {
+            return ErrorBoundary(
+              child: ConnectivityWrapper(
+                child: child ?? const SizedBox.shrink(),
+              ),
+            );
+          },
         );
       },
     );

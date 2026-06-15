@@ -22,9 +22,10 @@ class AppConstants {
 
   // UI Constants
   static const double defaultPadding = 16.0;
-  static const double defaultBorderRadius = 8.0;
-  static const double defaultElevation = 2.0;
+  static const double defaultBorderRadius = 16.0;
+  static const double defaultElevation = 0.0;
   static const double defaultIconSize = 24.0;
+  static const String appFontFamily = 'Roboto';
 
   // Animation Durations
   static const Duration shortAnimationDuration = Duration(milliseconds: 200);
@@ -43,8 +44,8 @@ class AppConstants {
   static const String userIdKey = 'user_id';
 
   // Date Formats
-  static const String dateFormat = 'yyyy-MM-dd';
-  static const String dateTimeFormat = 'yyyy-MM-dd HH:mm:ss';
+  static const String dateFormat = 'dd-MM-yyyy';
+  static const String dateTimeFormat = 'dd-MM-yyyy HH:mm:ss';
   static const String timeFormat = 'HH:mm:ss';
 
   // File Upload
