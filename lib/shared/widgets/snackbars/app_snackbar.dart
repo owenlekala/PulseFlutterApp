@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_icons.dart';
 
-enum AppSnackBarType {
-  success,
-  error,
-  warning,
-  info,
-}
+enum AppSnackBarType { success, error, warning, info }
 
 class AppSnackBar extends StatelessWidget {
   final String message;
@@ -63,22 +58,12 @@ class AppSnackBar extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.2),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: textColor.withValues(alpha: 0.14)),
       ),
       child: Row(
         children: [
-          Icon(
-            icon ?? defaultIcon,
-            color: textColor,
-            size: 24,
-          ),
+          Icon(icon ?? defaultIcon, color: textColor, size: 24),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
@@ -95,7 +80,10 @@ class AppSnackBar extends StatelessWidget {
               onPressed: onAction,
               style: TextButton.styleFrom(
                 foregroundColor: textColor,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 minimumSize: Size.zero,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
@@ -284,4 +272,3 @@ class SnackBarHelper {
     );
   }
 }
-

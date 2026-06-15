@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/app_icons.dart';
-import '../buttons/app_icon_button.dart';
 
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -27,7 +26,8 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showMenuButton
           ? IconButton(
               icon: Icon(AppIcons.menu),
-              onPressed: onMenuPressed ?? () => Scaffold.of(context).openDrawer(),
+              onPressed:
+                  onMenuPressed ?? () => Scaffold.of(context).openDrawer(),
               tooltip: 'Open menu',
             )
           : null,
@@ -35,12 +35,16 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
         ...?actions,
         Consumer<ThemeProvider>(
           builder: (context, themeProvider, _) {
-            return AppIconButton(
-              icon: themeProvider.isDarkMode
-                  ? Icons.light_mode
-                  : Icons.dark_mode,
-              onPressed: () => themeProvider.toggleTheme(),
-              tooltip: 'Toggle theme',
+            return Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                icon: Icon(
+                  themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                ),
+                onPressed: () => themeProvider.toggleTheme(),
+                tooltip: 'Toggle theme',
+                visualDensity: VisualDensity.compact,
+              ),
             );
           },
         ),
@@ -51,6 +55,8 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight(
-        bottom != null ? kToolbarHeight + bottom!.preferredSize.height : kToolbarHeight,
-      );
+    bottom != null
+        ? kToolbarHeight + bottom!.preferredSize.height
+        : kToolbarHeight,
+  );
 }

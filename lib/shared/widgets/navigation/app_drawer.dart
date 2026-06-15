@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/app_icons.dart';
-import '../buttons/app_icon_button.dart';
 
 class AppDrawer extends StatelessWidget {
   final String? userName;
@@ -68,7 +67,8 @@ class AppDrawer extends StatelessWidget {
                       Text(
                         userEmail!,
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onPrimaryContainer.withOpacity(0.8),
+                          color: theme.colorScheme.onPrimaryContainer
+                              .withValues(alpha: 0.8),
                         ),
                       ),
                     ],
@@ -146,10 +146,7 @@ class _DrawerItemWidget extends StatelessWidget {
   final AppDrawerItem item;
   final VoidCallback onTap;
 
-  const _DrawerItemWidget({
-    required this.item,
-    required this.onTap,
-  });
+  const _DrawerItemWidget({required this.item, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +156,8 @@ class _DrawerItemWidget extends StatelessWidget {
     return ListTile(
       leading: Icon(
         item.icon,
-        color: item.iconColor ??
+        color:
+            item.iconColor ??
             (isSelected
                 ? theme.colorScheme.primary
                 : theme.colorScheme.onSurfaceVariant),
@@ -167,7 +165,8 @@ class _DrawerItemWidget extends StatelessWidget {
       title: Text(
         item.title,
         style: theme.textTheme.titleMedium?.copyWith(
-          color: item.textColor ??
+          color:
+              item.textColor ??
               (isSelected
                   ? theme.colorScheme.primary
                   : theme.colorScheme.onSurface),
@@ -175,7 +174,9 @@ class _DrawerItemWidget extends StatelessWidget {
         ),
       ),
       selected: isSelected,
-      selectedTileColor: theme.colorScheme.primaryContainer.withOpacity(0.3),
+      selectedTileColor: theme.colorScheme.primaryContainer.withValues(
+        alpha: 0.3,
+      ),
       onTap: item.onTap != null ? onTap : null,
     );
   }

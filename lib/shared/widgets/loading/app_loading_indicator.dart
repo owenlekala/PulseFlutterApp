@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AppLoadingType {
-  circular,
-  linear,
-}
+enum AppLoadingType { circular, linear }
 
 class AppLoadingIndicator extends StatelessWidget {
   final AppLoadingType type;
@@ -66,4 +63,3 @@ class AppLoadingIndicator extends StatelessWidget {
     return indicator;
   }
 }
-

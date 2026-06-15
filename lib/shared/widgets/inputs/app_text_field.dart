@@ -23,6 +23,7 @@ class AppTextField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final String? helperText;
   final String? errorText;
+  final bool enableInlineValidation;
 
   const AppTextField({
     super.key,
@@ -47,6 +48,7 @@ class AppTextField extends StatefulWidget {
     this.textInputAction,
     this.helperText,
     this.errorText,
+    this.enableInlineValidation = true,
   });
 
   @override
@@ -56,16 +58,41 @@ class AppTextField extends StatefulWidget {
 class _AppTextFieldState extends State<AppTextField> {
   late bool _obscureText;
   late TextEditingController _controller;
+  final GlobalKey<FormFieldState<String>> _fieldKey =
+      GlobalKey<FormFieldState<String>>();
+  FocusNode? _internalFocusNode;
+  bool _hasInteracted = false;
+
+  FocusNode get _effectiveFocusNode => widget.focusNode ?? _internalFocusNode!;
 
   @override
   void initState() {
     super.initState();
     _obscureText = widget.obscureText;
-    _controller = widget.controller ?? TextEditingController(text: widget.initialValue);
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initialValue);
+    _internalFocusNode = widget.focusNode == null ? FocusNode() : null;
+    _effectiveFocusNode.addListener(_handleFocusChange);
+  }
+
+  @override
+  void didUpdateWidget(covariant AppTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.focusNode != widget.focusNode) {
+      oldWidget.focusNode?.removeListener(_handleFocusChange);
+      if (oldWidget.focusNode == null && widget.focusNode != null) {
+        _internalFocusNode?.dispose();
+        _internalFocusNode = null;
+      }
+      _internalFocusNode ??= widget.focusNode == null ? FocusNode() : null;
+      _effectiveFocusNode.addListener(_handleFocusChange);
+    }
   }
 
   @override
   void dispose() {
+    _effectiveFocusNode.removeListener(_handleFocusChange);
+    _internalFocusNode?.dispose();
     if (widget.controller == null) {
       _controller.dispose();
     }
@@ -78,8 +105,29 @@ class _AppTextFieldState extends State<AppTextField> {
     });
   }
 
+  void _handleFocusChange() {
+    if (!_effectiveFocusNode.hasFocus) {
+      _validateInline();
+    }
+  }
+
+  void _validateInline() {
+    if (!widget.enableInlineValidation || widget.validator == null) {
+      return;
+    }
+
+    if (_hasInteracted) {
+      _fieldKey.currentState?.validate();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final inputTextStyle = Theme.of(context).textTheme.bodyLarge?.copyWith(
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -92,36 +140,43 @@ class _AppTextFieldState extends State<AppTextField> {
             ),
           ),
         TextFormField(
+          key: _fieldKey,
           controller: _controller,
           obscureText: _obscureText,
           enabled: widget.enabled,
           readOnly: widget.readOnly,
           keyboardType: widget.keyboardType,
+          style: inputTextStyle,
           maxLines: widget.maxLines,
           maxLength: widget.maxLength,
           validator: widget.validator,
-          onChanged: widget.onChanged,
+          autovalidateMode: AutovalidateMode.disabled,
+          forceErrorText: widget.errorText,
+          onChanged: (value) {
+            _hasInteracted = true;
+            _validateInline();
+            widget.onChanged?.call(value);
+          },
           onFieldSubmitted: widget.onSubmitted,
-          onTap: widget.onTap,
-          focusNode: widget.focusNode,
+          onTap: () {
+            _hasInteracted = true;
+            widget.onTap?.call();
+          },
+          focusNode: _effectiveFocusNode,
           textInputAction: widget.textInputAction,
           decoration: InputDecoration(
             hintText: widget.hint,
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.showPasswordToggle
                 ? IconButton(
-                    icon: Icon(
-                      _obscureText ? AppIcons.eyeOff : AppIcons.eye,
-                    ),
+                    icon: Icon(_obscureText ? AppIcons.eyeOff : AppIcons.eye),
                     onPressed: _toggleObscureText,
                   )
                 : widget.suffixIcon,
             helperText: widget.helperText,
-            errorText: widget.errorText,
           ),
         ),
       ],
     );
   }
 }
-
