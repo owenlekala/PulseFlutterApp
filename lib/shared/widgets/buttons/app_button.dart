@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 
-enum AppButtonType {
-  primary,
-  secondary,
-  outlined,
-  text,
-}
+enum AppButtonType { primary, secondary, outlined, text }
 
-enum AppButtonSize {
-  small,
-  medium,
-  large,
-}
+enum AppButtonSize { small, medium, large }
 
 class AppButton extends StatelessWidget {
   final String text;
@@ -52,13 +43,13 @@ class AppButton extends StatelessWidget {
           onPressed: isEnabled ? onPressed : null,
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor ?? theme.colorScheme.primary,
-            foregroundColor: foregroundColor ?? theme.colorScheme.onPrimary,
+            foregroundColor: foregroundColor ?? Colors.white,
             padding: padding ?? _getPadding(),
             minimumSize: isFullWidth ? const Size(double.infinity, 0) : null,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50), // Fully rounded ends
             ),
-            elevation: 2,
+            elevation: 0,
           ),
           child: _buildChild(context),
         );
@@ -68,13 +59,13 @@ class AppButton extends StatelessWidget {
           onPressed: isEnabled ? onPressed : null,
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor ?? theme.colorScheme.secondary,
-            foregroundColor: foregroundColor ?? theme.colorScheme.onSecondary,
+            foregroundColor: foregroundColor ?? Colors.white,
             padding: padding ?? _getPadding(),
             minimumSize: isFullWidth ? const Size(double.infinity, 0) : null,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50), // Fully rounded ends
             ),
-            elevation: 2,
+            elevation: 0,
           ),
           child: _buildChild(context),
         );
@@ -124,7 +115,7 @@ class AppButton extends StatelessWidget {
         child: CircularProgressIndicator(
           strokeWidth: 2,
           valueColor: AlwaysStoppedAnimation<Color>(
-            foregroundColor ?? Theme.of(context).colorScheme.onPrimary,
+            foregroundColor ?? Colors.white,
           ),
         ),
       );
@@ -160,9 +151,15 @@ class AppButton extends StatelessWidget {
       case AppButtonSize.small:
         return const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
       case AppButtonSize.medium:
-        return const EdgeInsets.symmetric(horizontal: 28, vertical: 16); // Increased height
+        return const EdgeInsets.symmetric(
+          horizontal: 28,
+          vertical: 16,
+        ); // Increased height
       case AppButtonSize.large:
-        return const EdgeInsets.symmetric(horizontal: 36, vertical: 20); // Increased height
+        return const EdgeInsets.symmetric(
+          horizontal: 36,
+          vertical: 20,
+        ); // Increased height
     }
   }
 

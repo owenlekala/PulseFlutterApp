@@ -41,10 +41,7 @@ class AppLineChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title != null) ...[
-            Text(
-              title!,
-              style: theme.textTheme.titleLarge,
-            ),
+            Text(title!, style: theme.textTheme.titleLarge),
             const SizedBox(height: 16),
           ],
           SizedBox(
@@ -126,9 +123,7 @@ class AppLineChart extends StatelessWidget {
                 ),
                 borderData: FlBorderData(
                   show: true,
-                  border: Border.all(
-                    color: AppColors.getBorder(brightness),
-                  ),
+                  border: Border.all(color: AppColors.getBorder(brightness)),
                 ),
                 lineBarsData: [
                   LineChartBarData(
@@ -162,4 +157,3 @@ class AppLineChart extends StatelessWidget {
     );
   }
 }
-

@@ -14,8 +14,8 @@ class ExampleProvider extends ChangeNotifier {
   ExampleProvider({
     required ExampleRemoteDatasource remoteDatasource,
     required ExampleLocalDatasource localDatasource,
-  })  : _remoteDatasource = remoteDatasource,
-        _localDatasource = localDatasource;
+  }) : _remoteDatasource = remoteDatasource,
+       _localDatasource = localDatasource;
 
   // State
   ExampleModel? _example;
@@ -32,11 +32,7 @@ class ExampleProvider extends ChangeNotifier {
 
   /// Convert DTO to Domain Model
   ExampleModel _dtoToModel(ExampleResponseDto dto) {
-    return ExampleModel(
-      id: dto.id,
-      name: dto.name,
-      createdAt: dto.createdAt,
-    );
+    return ExampleModel(id: dto.id, name: dto.name, createdAt: dto.createdAt);
   }
 
   /// Convert list of DTOs to Models
@@ -219,4 +215,3 @@ class ExampleProvider extends ChangeNotifier {
     }
   }
 }
-

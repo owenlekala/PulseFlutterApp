@@ -44,13 +44,9 @@ class AppIconButton extends StatelessWidget {
     );
 
     if (tooltip != null) {
-      return Tooltip(
-        message: tooltip!,
-        child: button,
-      );
+      return Tooltip(message: tooltip!, child: button);
     }
 
     return button;
   }
 }
-

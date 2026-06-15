@@ -26,9 +26,8 @@ class AppCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cardElevation = elevation ?? AppConstants.defaultElevation;
-    final cardBorderRadius = borderRadius ??
-        BorderRadius.circular(AppConstants.defaultBorderRadius);
+    final cardBorderRadius =
+        borderRadius ?? BorderRadius.circular(AppConstants.defaultBorderRadius);
 
     Widget card = Container(
       padding: padding ?? const EdgeInsets.all(AppConstants.defaultPadding),
@@ -36,27 +35,16 @@ class AppCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: color ?? theme.cardColor,
         borderRadius: cardBorderRadius,
-        boxShadow: boxShadow ??
-            [
-              BoxShadow(
-                color: theme.shadowColor.withValues(alpha: 0.1),
-                blurRadius: cardElevation * 2,
-                offset: Offset(0, cardElevation),
-              ),
-            ],
+        border: Border.all(color: theme.colorScheme.outlineVariant),
+        boxShadow: boxShadow ?? const [],
       ),
       child: child,
     );
 
     if (onTap != null) {
-      return InkWell(
-        onTap: onTap,
-        borderRadius: cardBorderRadius,
-        child: card,
-      );
+      return InkWell(onTap: onTap, borderRadius: cardBorderRadius, child: card);
     }
 
     return card;
   }
 }
-
