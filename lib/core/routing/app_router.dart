@@ -30,7 +30,8 @@ class AppRouter {
             ),
             const SizedBox(height: 16),
             Text(
-              state.error?.toString() ?? 'The requested page could not be found.',
+              state.error?.toString() ??
+                  'The requested page could not be found.',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 24),
@@ -49,7 +50,6 @@ class AppRouter {
 class AppRoutes {
   static const String splash = '/splash';
   static const String home = '/home';
-  
+
   // Add more route constants here
 }
-

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app_colors.dart';
+import 'app_theme_extensions.dart';
 import '../constants/app_constants.dart';
 
 class AppTheme {
@@ -23,7 +24,7 @@ class AppTheme {
         onErrorContainer: AppColors.errorLight,
         surface: AppColors.surfaceLight,
         onSurface: AppColors.textPrimaryLight,
-        surfaceVariant: AppColors.surfaceVariantLight,
+        surfaceContainerHighest: AppColors.surfaceVariantLight,
         onSurfaceVariant: AppColors.textSecondaryLight,
         outline: AppColors.borderLight,
         outlineVariant: AppColors.borderVariantLight,
@@ -36,6 +37,29 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.backgroundLight,
       cardColor: AppColors.surfaceLight,
       dividerColor: AppColors.dividerLight,
+      extensions: const [
+        AppSemanticColors(
+          fieldBackground: AppColors.surfaceVariantLight,
+          fieldBackgroundDisabled: Color(0xFFE9EEF5),
+          fieldBorderActive: AppColors.primaryLight,
+          uploadIdleSurface: Color(0xFFF8FBFF),
+          uploadSuccessSurface: AppColors.successContainerLight,
+          uploadWarningSurface: AppColors.warningContainerLight,
+          uploadErrorSurface: AppColors.errorContainerLight,
+          skeletonBase: Color(0xFFE2E8F0),
+          skeletonHighlight: Color(0xFFF8FAFC),
+          sheetBackground: AppColors.surfaceLight,
+          chipNeutralBackground: Color(0xFFE2E8F0),
+          chipNeutralForeground: Color(0xFF334155),
+          chipSuccessBackground: AppColors.successContainerLight,
+          chipSuccessForeground: Color(0xFF047857),
+          chipWarningBackground: AppColors.warningContainerLight,
+          chipWarningForeground: Color(0xFFB45309),
+          chipErrorBackground: AppColors.errorContainerLight,
+          chipErrorForeground: Color(0xFFB91C1C),
+          dragHoverSurface: AppColors.primaryContainerLight,
+        ),
+      ],
       textTheme: _buildTextTheme(Brightness.light),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.surfaceLight,
@@ -84,12 +108,11 @@ class AppTheme {
           backgroundColor: AppColors.primaryLight,
           foregroundColor: Colors.white,
           elevation: 2,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 12,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius: BorderRadius.circular(
+              AppConstants.defaultBorderRadius,
+            ),
           ),
           textStyle: const TextStyle(
             fontSize: 14,
@@ -102,12 +125,11 @@ class AppTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.primaryLight,
           side: BorderSide(color: AppColors.primaryLight),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 12,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius: BorderRadius.circular(
+              AppConstants.defaultBorderRadius,
+            ),
           ),
           textStyle: const TextStyle(
             fontSize: 14,
@@ -119,12 +141,11 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primaryLight,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius: BorderRadius.circular(
+              AppConstants.defaultBorderRadius,
+            ),
           ),
           textStyle: const TextStyle(
             fontSize: 14,
@@ -155,7 +176,7 @@ class AppTheme {
         onErrorContainer: AppColors.errorDark,
         surface: AppColors.surfaceDark,
         onSurface: AppColors.textPrimaryDark,
-        surfaceVariant: AppColors.surfaceVariantDark,
+        surfaceContainerHighest: AppColors.surfaceVariantDark,
         onSurfaceVariant: AppColors.textSecondaryDark,
         outline: AppColors.borderDark,
         outlineVariant: AppColors.borderVariantDark,
@@ -168,6 +189,29 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.backgroundDark,
       cardColor: AppColors.surfaceDark,
       dividerColor: AppColors.dividerDark,
+      extensions: const [
+        AppSemanticColors(
+          fieldBackground: AppColors.surfaceVariantDark,
+          fieldBackgroundDisabled: Color(0xFF2B2E2B),
+          fieldBorderActive: AppColors.primaryDark,
+          uploadIdleSurface: Color(0xFF202420),
+          uploadSuccessSurface: AppColors.successContainerDark,
+          uploadWarningSurface: AppColors.warningContainerDark,
+          uploadErrorSurface: AppColors.errorContainerDark,
+          skeletonBase: Color(0xFF353A35),
+          skeletonHighlight: Color(0xFF4B4F4B),
+          sheetBackground: AppColors.surfaceDark,
+          chipNeutralBackground: Color(0xFF363A36),
+          chipNeutralForeground: Color(0xFFC0C4C4),
+          chipSuccessBackground: AppColors.successContainerDark,
+          chipSuccessForeground: Color(0xFF6EE7B7),
+          chipWarningBackground: AppColors.warningContainerDark,
+          chipWarningForeground: Color(0xFFFCD34D),
+          chipErrorBackground: AppColors.errorContainerDark,
+          chipErrorForeground: Color(0xFFFCA5A5),
+          dragHoverSurface: AppColors.primaryContainerDark,
+        ),
+      ],
       textTheme: _buildTextTheme(Brightness.dark),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.surfaceDark,
@@ -216,12 +260,11 @@ class AppTheme {
           backgroundColor: AppColors.primaryDark,
           foregroundColor: Colors.black,
           elevation: 2,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 12,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius: BorderRadius.circular(
+              AppConstants.defaultBorderRadius,
+            ),
           ),
           textStyle: const TextStyle(
             fontSize: 14,
@@ -234,12 +277,11 @@ class AppTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.primaryDark,
           side: BorderSide(color: AppColors.primaryDark),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 12,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius: BorderRadius.circular(
+              AppConstants.defaultBorderRadius,
+            ),
           ),
           textStyle: const TextStyle(
             fontSize: 14,
@@ -251,12 +293,11 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primaryDark,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius: BorderRadius.circular(
+              AppConstants.defaultBorderRadius,
+            ),
           ),
           textStyle: const TextStyle(
             fontSize: 14,
@@ -381,7 +422,7 @@ class AppTheme {
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
-  final SharedPreferences _prefs;
+  final SharedPreferences? _prefs;
 
   ThemeProvider(this._prefs) {
     _loadThemeMode();
@@ -398,6 +439,10 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   Future<void> _loadThemeMode() async {
+    if (_prefs == null) {
+      return;
+    }
+
     final savedTheme = _prefs.getString(AppConstants.themeKey);
     if (savedTheme != null) {
       _themeMode = ThemeMode.values.firstWhere(
@@ -410,7 +455,7 @@ class ThemeProvider extends ChangeNotifier {
 
   Future<void> setThemeMode(ThemeMode mode) async {
     _themeMode = mode;
-    await _prefs.setString(AppConstants.themeKey, mode.toString());
+    await _prefs?.setString(AppConstants.themeKey, mode.toString());
     notifyListeners();
   }
 
@@ -425,4 +470,3 @@ class ThemeProvider extends ChangeNotifier {
     }
   }
 }
-

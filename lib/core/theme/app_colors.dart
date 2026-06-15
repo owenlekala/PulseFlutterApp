@@ -3,70 +3,84 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Primary Colors - Blue
   static const Color primaryLight = Color(0xFF2563EB); // Blue
-  static const Color primaryDark = Color(0xFF3B82F6); // Lighter Blue for dark mode
-  
+  static const Color primaryDark = Color(
+    0xFF3B82F6,
+  ); // Lighter Blue for dark mode
+
   static const Color primaryContainerLight = Color(0xFFDBEAFE);
   static const Color primaryContainerDark = Color(0xFF1E3A8A);
 
   // Secondary Colors
   static const Color secondaryLight = Color(0xFF10B981);
   static const Color secondaryDark = Color(0xFF34D399);
-  
+
   static const Color secondaryContainerLight = Color(0xFFD1FAE5);
   static const Color secondaryContainerDark = Color(0xFF064E3B);
 
   // Error Colors
   static const Color errorLight = Color(0xFFEF4444);
   static const Color errorDark = Color(0xFFF87171);
-  
+
   static const Color errorContainerLight = Color(0xFFFEE2E2);
   static const Color errorContainerDark = Color(0xFF7F1D1D);
 
   // Warning Colors
   static const Color warningLight = Color(0xFFF59E0B);
   static const Color warningDark = Color(0xFFFBBF24);
-  
+
   static const Color warningContainerLight = Color(0xFFFEF3C7);
   static const Color warningContainerDark = Color(0xFF78350F);
 
   // Success Colors
   static const Color successLight = Color(0xFF10B981);
   static const Color successDark = Color(0xFF34D399);
-  
+
   static const Color successContainerLight = Color(0xFFD1FAE5);
   static const Color successContainerDark = Color(0xFF064E3B);
 
   // Info Colors
   static const Color infoLight = Color(0xFF3B82F6);
   static const Color infoDark = Color(0xFF60A5FA);
-  
+
   static const Color infoContainerLight = Color(0xFFDBEAFE);
   static const Color infoContainerDark = Color(0xFF1E3A8A);
 
   // Background Colors - Based on the dark mode image
   static const Color backgroundLight = Color(0xFFFFFFFF);
-  static const Color backgroundDark = Color(0xFF191B19); // Dark charcoal from image
-  
+  static const Color backgroundDark = Color(
+    0xFF191B19,
+  ); // Dark charcoal from image
+
   static const Color surfaceLight = Color(0xFFF8FAFC);
-  static const Color surfaceDark = Color(0xFF272927); // Slightly lighter than background
-  
+  static const Color surfaceDark = Color(
+    0xFF272927,
+  ); // Slightly lighter than background
+
   static const Color surfaceVariantLight = Color(0xFFF1F5F9);
-  static const Color surfaceVariantDark = Color(0xFF363A36); // Medium gray from image
+  static const Color surfaceVariantDark = Color(
+    0xFF363A36,
+  ); // Medium gray from image
 
   // Text Colors - Based on the dark mode image
   static const Color textPrimaryLight = Color(0xFF0F172A);
-  static const Color textPrimaryDark = Color(0xFFC0C4C4); // Light gray text from image
-  
+  static const Color textPrimaryDark = Color(
+    0xFFC0C4C4,
+  ); // Light gray text from image
+
   static const Color textSecondaryLight = Color(0xFF64748B);
-  static const Color textSecondaryDark = Color(0xFF8D8E8E); // Medium gray text from image
-  
+  static const Color textSecondaryDark = Color(
+    0xFF8D8E8E,
+  ); // Medium gray text from image
+
   static const Color textTertiaryLight = Color(0xFF94A3B8);
-  static const Color textTertiaryDark = Color(0xFF696969); // Darker gray from image
+  static const Color textTertiaryDark = Color(
+    0xFF696969,
+  ); // Darker gray from image
 
   // Border Colors - Based on the dark mode image
   static const Color borderLight = Color(0xFFE2E8F0);
   static const Color borderDark = Color(0xFF4B4F4B); // Border color from image
-  
+
   static const Color borderVariantLight = Color(0xFFF1F5F9);
   static const Color borderVariantDark = Color(0xFF475569);
 
@@ -96,7 +110,9 @@ class AppColors {
   }
 
   static Color getTextSecondary(Brightness brightness) {
-    return brightness == Brightness.light ? textSecondaryLight : textSecondaryDark;
+    return brightness == Brightness.light
+        ? textSecondaryLight
+        : textSecondaryDark;
   }
 
   static Color getBorder(Brightness brightness) {
