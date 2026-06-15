@@ -22,14 +22,14 @@ class ConnectivityHelper {
   static Future<bool> checkConnectivity() async {
     try {
       final result = await _connectivity.checkConnectivity();
-      final hasConnection = result.isNotEmpty &&
-          !result.contains(ConnectivityResult.none);
-      
+      final hasConnection =
+          result.isNotEmpty && !result.contains(ConnectivityResult.none);
+
       _isConnected.value = hasConnection;
       if (result.isNotEmpty) {
         _connectivityResult.value = result.first;
       }
-      
+
       return hasConnection;
     } catch (e) {
       debugPrint('Error checking connectivity: $e');
@@ -43,17 +43,17 @@ class ConnectivityHelper {
     void Function(List<ConnectivityResult>) onConnectivityChanged,
   ) {
     _subscription?.cancel();
-    _subscription = _connectivity.onConnectivityChanged.listen(
-      (List<ConnectivityResult> result) {
-        final hasConnection =
-            result.isNotEmpty && !result.contains(ConnectivityResult.none);
-        _isConnected.value = hasConnection;
-        if (result.isNotEmpty) {
-          _connectivityResult.value = result.first;
-        }
-        onConnectivityChanged(result);
-      },
-    );
+    _subscription = _connectivity.onConnectivityChanged.listen((
+      List<ConnectivityResult> result,
+    ) {
+      final hasConnection =
+          result.isNotEmpty && !result.contains(ConnectivityResult.none);
+      _isConnected.value = hasConnection;
+      if (result.isNotEmpty) {
+        _connectivityResult.value = result.first;
+      }
+      onConnectivityChanged(result);
+    });
     return _subscription!;
   }
 

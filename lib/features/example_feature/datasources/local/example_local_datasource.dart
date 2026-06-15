@@ -49,9 +49,10 @@ class ExampleLocalDatasource {
       try {
         final jsonList = jsonDecode(cached) as List;
         return jsonList
-            .map((item) => ExampleResponseDto.fromJson(
-                  item as Map<String, dynamic>,
-                ))
+            .map(
+              (item) =>
+                  ExampleResponseDto.fromJson(item as Map<String, dynamic>),
+            )
             .toList();
       } catch (e) {
         // If parsing fails, remove corrupted cache
@@ -81,4 +82,3 @@ class ExampleLocalDatasource {
     await prefs.remove('$_exampleCachePrefix$id');
   }
 }
-

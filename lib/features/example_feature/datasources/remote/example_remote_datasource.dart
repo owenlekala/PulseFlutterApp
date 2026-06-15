@@ -37,19 +37,17 @@ class ExampleRemoteDatasource {
   Future<List<ExampleResponseDto>> getExamples() async {
     try {
       final response = await http
-          .get(
-            Uri.parse(ApiEndpoints.items),
-            headers: ApiConfig.defaultHeaders,
-          )
+          .get(Uri.parse(ApiEndpoints.items), headers: ApiConfig.defaultHeaders)
           .timeout(ApiConfig.connectTimeout);
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body) as Map<String, dynamic>;
         final items = json['items'] as List;
         return items
-            .map((item) => ExampleResponseDto.fromJson(
-                  item as Map<String, dynamic>,
-                ))
+            .map(
+              (item) =>
+                  ExampleResponseDto.fromJson(item as Map<String, dynamic>),
+            )
             .toList();
       } else {
         throw Exception(
@@ -140,4 +138,3 @@ class ExampleRemoteDatasource {
     }
   }
 }
-
