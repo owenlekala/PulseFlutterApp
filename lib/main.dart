@@ -7,7 +7,6 @@ import 'core/theme/app_theme.dart';
 import 'core/config/app_config.dart';
 import 'core/routing/app_router.dart';
 import 'core/error/error_handler_setup.dart';
-import 'core/error/error_boundary.dart';
 import 'shared/widgets/connectivity/no_internet_screen.dart';
 
 void main() async {
@@ -60,11 +59,7 @@ class MyApp extends StatelessWidget {
           themeMode: themeProvider.themeMode,
           routerConfig: AppRouter.router,
           builder: (context, child) {
-            return ErrorBoundary(
-              child: ConnectivityWrapper(
-                child: child ?? const SizedBox.shrink(),
-              ),
-            );
+            return ConnectivityWrapper(child: child ?? const SizedBox.shrink());
           },
         );
       },
