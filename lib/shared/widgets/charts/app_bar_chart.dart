@@ -36,10 +36,7 @@ class AppBarChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title != null) ...[
-            Text(
-              title!,
-              style: theme.textTheme.titleLarge,
-            ),
+            Text(title!, style: theme.textTheme.titleLarge),
             const SizedBox(height: 16),
           ],
           SizedBox(
@@ -132,9 +129,7 @@ class AppBarChart extends StatelessWidget {
                 ),
                 borderData: FlBorderData(
                   show: true,
-                  border: Border.all(
-                    color: AppColors.getBorder(brightness),
-                  ),
+                  border: Border.all(color: AppColors.getBorder(brightness)),
                 ),
                 barGroups: barGroups,
                 barTouchData: BarTouchData(
@@ -152,4 +147,3 @@ class AppBarChart extends StatelessWidget {
     );
   }
 }
-

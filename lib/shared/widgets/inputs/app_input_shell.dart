@@ -88,9 +88,7 @@ class AppInputSurface extends StatelessWidget {
                 horizontal: AppConstants.defaultPadding,
                 vertical: 16,
               ),
-          decoration: BoxDecoration(
-            borderRadius: radius,
-          ),
+          decoration: BoxDecoration(borderRadius: radius),
           child: child,
         ),
       ),

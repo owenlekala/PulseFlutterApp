@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/config/app_config.dart';
 import '../../../core/theme/app_colors.dart';
@@ -19,16 +20,17 @@ import '../../../shared/widgets/inputs/app_places_picker.dart';
 import '../../../shared/widgets/inputs/app_segmented_field.dart';
 import '../../../shared/widgets/inputs/app_text_field.dart';
 import '../../../shared/widgets/inputs/app_toggle_field.dart';
+import '../../../shared/widgets/layout/app_page_template.dart';
 import '../../../shared/widgets/list/app_action_tile.dart';
 import '../../../shared/widgets/list/app_slidable_list_item.dart';
 import '../../../shared/widgets/loading/app_loading_indicator.dart';
 import '../../../shared/widgets/loading/app_section_shimmer.dart';
 import '../../../shared/widgets/loading/app_skeleton_card.dart';
 import '../../../shared/widgets/loading/app_skeleton_form.dart';
+import '../../../shared/widgets/maps/app_google_map.dart';
 import '../../../shared/widgets/media/app_avatar.dart';
 import '../../../shared/widgets/media/app_empty_image.dart';
 import '../../../shared/widgets/media/app_network_image.dart';
-import '../../../shared/widgets/navigation/app_app_bar.dart';
 import '../../../shared/widgets/navigation/app_bottom_navigation_bar.dart';
 import '../../../shared/widgets/navigation/app_drawer.dart';
 import '../../../shared/widgets/navigation/app_tabs.dart';
@@ -49,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime? _selectedDate = DateTime.now();
   DateTime? _selectedTime = DateTime.now();
   DateTime? _selectedDateTime = DateTime.now().add(const Duration(days: 2));
+  DateTimeRange? _selectedDateRange = DateTimeRange(
+    start: DateTime.now(),
+    end: DateTime.now().add(const Duration(days: 4)),
+  );
   bool _notificationsEnabled = true;
   _PreferenceSegment _segment = _PreferenceSegment.driver;
   Set<String> _selectedFilters = {'Pending'};
@@ -85,8 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: const AppAppBar(title: 'Shared UI Showcase'),
+    return AppPageTemplate(
+      title: 'Shared UI Showcase',
       drawer: AppDrawer(
         userName: 'John Doe',
         userEmail: 'john.doe@example.com',
@@ -135,8 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
+      child: Column(
         children: [
           AppCard(
             color: theme.colorScheme.primaryContainer.withValues(alpha: 0.45),
@@ -251,6 +256,13 @@ class _HomeScreenState extends State<HomeScreen> {
               use24hFormat: true,
               minuteInterval: 15,
               onChanged: (value) => setState(() => _selectedDateTime = value),
+            ),
+            const SizedBox(height: 16),
+            AppDateRangeField(
+              label: 'Trip range',
+              value: _selectedDateRange,
+              helperText: 'Shared range selector for bookings and reports.',
+              onChanged: (value) => setState(() => _selectedDateRange = value),
             ),
             const SizedBox(height: 16),
             AppToggleField(
@@ -504,6 +516,54 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ],
+            ),
+          ]),
+          const SizedBox(height: 24),
+          _buildSection(context, 'Maps + Routing', [
+            AppCard(
+              padding: const EdgeInsets.all(0),
+              child: SizedBox(
+                height: 260,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: AppGoogleMap(
+                    latitude: -26.2041,
+                    longitude: 28.0473,
+                    zoom: 11,
+                    pins: const [
+                      AppMapPin(
+                        id: 'origin',
+                        position: LatLng(-26.2041, 28.0473),
+                        title: 'Origin',
+                        hue: BitmapDescriptor.hueAzure,
+                      ),
+                      AppMapPin(
+                        id: 'stop',
+                        position: LatLng(-26.1700, 28.0400),
+                        title: 'Checkpoint',
+                        hue: BitmapDescriptor.hueOrange,
+                      ),
+                      AppMapPin(
+                        id: 'destination',
+                        position: LatLng(-26.1300, 28.0500),
+                        title: 'Destination',
+                        hue: BitmapDescriptor.hueGreen,
+                      ),
+                    ],
+                    routeLines: const [
+                      AppMapRouteLine(
+                        id: 'route-a',
+                        color: AppColors.primaryLight,
+                        points: [
+                          LatLng(-26.2041, 28.0473),
+                          LatLng(-26.1700, 28.0400),
+                          LatLng(-26.1300, 28.0500),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ]),
           const SizedBox(height: 24),

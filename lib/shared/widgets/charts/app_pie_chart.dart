@@ -55,10 +55,7 @@ class AppPieChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title != null) ...[
-            Text(
-              title!,
-              style: theme.textTheme.titleLarge,
-            ),
+            Text(title!, style: theme.textTheme.titleLarge),
             const SizedBox(height: 16),
           ],
           Row(
@@ -117,4 +114,3 @@ class AppPieChart extends StatelessWidget {
     );
   }
 }
-
