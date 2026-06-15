@@ -184,14 +184,45 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(DropdownButtonFormField<String>));
+      await tester.tap(find.text('Choose role'));
       await tester.pumpAndSettle();
+      expect(find.text('Role'), findsNWidgets(2));
+      expect(find.byType(BottomSheet), findsOneWidget);
       await tester.tapAt(const Offset(8, 8));
       await tester.pumpAndSettle();
 
       expect(find.text('Role is required'), findsOneWidget);
     },
   );
+
+  testWidgets('AppDropdown selects an option from a bottom sheet', (
+    tester,
+  ) async {
+    String? selected;
+
+    await tester.pumpWidget(
+      wrapWithMaterialApp(
+        AppDropdown<String>(
+          label: 'Role',
+          hint: 'Choose role',
+          items: const [
+            DropdownMenuItem(value: 'driver', child: Text('Driver')),
+            DropdownMenuItem(value: 'admin', child: Text('Admin')),
+          ],
+          onChanged: (value) => selected = value,
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Choose role'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Admin'));
+    await tester.pumpAndSettle();
+
+    expect(selected, 'admin');
+    expect(find.byType(BottomSheet), findsNothing);
+    expect(find.text('Admin'), findsOneWidget);
+  });
 
   testWidgets('AppAvatar can show edit button and emit callback', (
     tester,

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+class _DropdownSelection<T> {
+  final T? value;
+
+  const _DropdownSelection(this.value);
+}
+
 class AppDropdown<T> extends StatefulWidget {
   final String? label;
   final String? hint;
@@ -38,12 +44,14 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
   final GlobalKey<FormFieldState<T>> _fieldKey = GlobalKey<FormFieldState<T>>();
   FocusNode? _internalFocusNode;
   bool _hasInteracted = false;
+  T? _selectedValue;
 
   FocusNode get _effectiveFocusNode => widget.focusNode ?? _internalFocusNode!;
 
   @override
   void initState() {
     super.initState();
+    _selectedValue = widget.value;
     _internalFocusNode = widget.focusNode == null ? FocusNode() : null;
     _effectiveFocusNode.addListener(_handleFocusChange);
   }
@@ -51,6 +59,10 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
   @override
   void didUpdateWidget(covariant AppDropdown<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.value != widget.value) {
+      _selectedValue = widget.value;
+      _fieldKey.currentState?.didChange(widget.value);
+    }
     if (oldWidget.focusNode != widget.focusNode) {
       oldWidget.focusNode?.removeListener(_handleFocusChange);
       if (oldWidget.focusNode == null && widget.focusNode != null) {
@@ -85,6 +97,103 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
     }
   }
 
+  Future<void> _showOptions() async {
+    if (!widget.enabled) {
+      return;
+    }
+
+    _hasInteracted = true;
+    _effectiveFocusNode.requestFocus();
+
+    final selection = await showModalBottomSheet<_DropdownSelection<T>>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (context) {
+        final theme = Theme.of(context);
+
+        return SafeArea(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.sizeOf(context).height * 0.75,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 0, 16, 12),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.label ?? widget.hint ?? 'Select an option',
+                          style: theme.textTheme.titleLarge,
+                        ),
+                      ),
+                      IconButton(
+                        tooltip: 'Close',
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.close_rounded),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(height: 1),
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    itemCount: widget.items.length,
+                    itemBuilder: (context, index) {
+                      final item = widget.items[index];
+                      final isSelected = item.value == _selectedValue;
+
+                      return ListTile(
+                        enabled: item.enabled,
+                        selected: isSelected,
+                        title: item.child,
+                        trailing: isSelected
+                            ? Icon(
+                                Icons.check_rounded,
+                                color: theme.colorScheme.primary,
+                              )
+                            : null,
+                        onTap: item.enabled
+                            ? () => Navigator.pop(
+                                context,
+                                _DropdownSelection<T>(item.value),
+                              )
+                            : null,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    _effectiveFocusNode.unfocus();
+    if (selection == null) {
+      _validateInline();
+      return;
+    }
+
+    setState(() {
+      _selectedValue = selection.value;
+    });
+    _fieldKey.currentState?.didChange(selection.value);
+    _validateInline();
+    widget.onChanged?.call(selection.value);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -101,34 +210,51 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
             padding: const EdgeInsets.only(bottom: 8),
             child: Text(widget.label!, style: theme.textTheme.labelLarge),
           ),
-        DropdownButtonFormField<T>(
+        FormField<T>(
           key: _fieldKey,
           initialValue: widget.value,
-          items: widget.items,
           validator: widget.validator,
           autovalidateMode: AutovalidateMode.disabled,
-          focusNode: _effectiveFocusNode,
           forceErrorText: widget.errorText,
-          style: inputTextStyle,
-          icon: Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
-          decoration: InputDecoration(
-            hintText: widget.hint,
-            prefixIcon: widget.prefixIcon,
-            helperText: widget.helperText,
-          ),
-          onTap: () {
-            _hasInteracted = true;
+          builder: (field) {
+            DropdownMenuItem<T>? selectedItem;
+            for (final item in widget.items) {
+              if (item.value == _selectedValue) {
+                selectedItem = item;
+                break;
+              }
+            }
+
+            return InkWell(
+              borderRadius: BorderRadius.circular(16),
+              onTap: widget.enabled ? _showOptions : null,
+              child: InputDecorator(
+                isEmpty: selectedItem == null,
+                isFocused: _effectiveFocusNode.hasFocus,
+                decoration: InputDecoration(
+                  enabled: widget.enabled,
+                  prefixIcon: widget.prefixIcon,
+                  helperText: widget.helperText,
+                  errorText: field.errorText,
+                  suffixIcon: Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                child: DefaultTextStyle(
+                  style: inputTextStyle ?? const TextStyle(),
+                  child:
+                      selectedItem?.child ??
+                      Text(
+                        widget.hint ?? '',
+                        style: inputTextStyle?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                ),
+              ),
+            );
           },
-          onChanged: widget.enabled
-              ? (value) {
-                  _hasInteracted = true;
-                  _validateInline();
-                  widget.onChanged?.call(value);
-                }
-              : null,
         ),
       ],
     );
