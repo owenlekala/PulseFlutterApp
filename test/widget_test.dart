@@ -46,9 +46,9 @@ void main() {
     );
 
     expect(find.text('Pickup date'), findsOneWidget);
-    expect(find.text('2026-06-14'), findsOneWidget);
+    expect(find.text('14-06-2026'), findsOneWidget);
 
-    await tester.tap(find.text('2026-06-14'));
+    await tester.tap(find.text('14-06-2026'));
     await tester.pumpAndSettle();
 
     expect(find.text('Cancel'), findsOneWidget);
