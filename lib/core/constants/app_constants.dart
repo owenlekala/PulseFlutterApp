@@ -63,7 +63,8 @@ class AppConstants {
 
   // Error Messages
   static const String networkErrorMessage = 'No internet connection';
-  static const String serverErrorMessage = 'Server error. Please try again later.';
+  static const String serverErrorMessage =
+      'Server error. Please try again later.';
   static const String unknownErrorMessage = 'An unexpected error occurred';
 
   // Success Messages
@@ -72,4 +73,3 @@ class AppConstants {
   static const String saveSuccessMessage = 'Saved successfully';
   static const String deleteSuccessMessage = 'Deleted successfully';
 }
-

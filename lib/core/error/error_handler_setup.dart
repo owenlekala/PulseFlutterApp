@@ -7,7 +7,7 @@ class ErrorHandlerSetup {
     // Handle Flutter framework errors
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
-      
+
       // In production, you might want to log to a crash reporting service
       if (kReleaseMode) {
         // Example: Firebase Crashlytics
@@ -45,18 +45,11 @@ class ErrorHandlerSetup {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.error_outline,
-                    size: 64,
-                    color: Colors.red,
-                  ),
+                  const Icon(Icons.error_outline, size: 64, color: Colors.red),
                   const SizedBox(height: 16),
                   const Text(
                     'Something went wrong',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   const Padding(
@@ -76,4 +69,3 @@ class ErrorHandlerSetup {
     };
   }
 }
-

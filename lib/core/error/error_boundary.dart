@@ -10,13 +10,9 @@ import '../../shared/widgets/snackbars/app_snackbar.dart';
 class ErrorBoundary extends StatefulWidget {
   final Widget child;
   final Widget Function(BuildContext context, Object error, StackTrace? stack)?
-      errorBuilder;
+  errorBuilder;
 
-  const ErrorBoundary({
-    super.key,
-    required this.child,
-    this.errorBuilder,
-  });
+  const ErrorBoundary({super.key, required this.child, this.errorBuilder});
 
   @override
   State<ErrorBoundary> createState() => _ErrorBoundaryState();
@@ -134,10 +130,7 @@ class ErrorScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Stack Trace:',
-                          style: theme.textTheme.titleSmall,
-                        ),
+                        Text('Stack Trace:', style: theme.textTheme.titleSmall),
                         const SizedBox(height: 8),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -167,10 +160,9 @@ class ErrorScreen extends StatelessWidget {
                   type: AppButtonType.outlined,
                   onPressed: () {
                     // Navigate to home
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/home',
-                      (route) => false,
-                    );
+                    Navigator.of(
+                      context,
+                    ).pushNamedAndRemoveUntil('/home', (route) => false);
                   },
                   isFullWidth: true,
                 ),
@@ -211,9 +203,7 @@ class ErrorHandler {
               color: AppColors.getError(Theme.of(context).brightness),
             ),
             const SizedBox(width: 12),
-            Expanded(
-              child: Text(title ?? 'Error'),
-            ),
+            Expanded(child: Text(title ?? 'Error')),
           ],
         ),
         content: SingleChildScrollView(
@@ -232,15 +222,17 @@ class ErrorHandler {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
                     stackTrace.toString(),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontFamily: 'monospace',
-                          fontSize: 10,
-                        ),
+                      fontFamily: 'monospace',
+                      fontSize: 10,
+                    ),
                   ),
                 ),
               ],
@@ -301,4 +293,3 @@ class ErrorHandler {
     );
   }
 }
-

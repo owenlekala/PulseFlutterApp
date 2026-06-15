@@ -23,4 +23,3 @@ enum Environment {
   bool get isStaging => this == Environment.staging;
   bool get isProduction => this == Environment.production;
 }
-
